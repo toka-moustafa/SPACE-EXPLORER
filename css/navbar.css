@@ -144,56 +144,9 @@ body {
 }
 
 
-/* =========================================
-   MOVING LIGHT AROUND THE ORBITS
-========================================= */
+/* Continuous horizontal-plane rotation */
 
-.orbit-light {
-    position: absolute;
-    inset: -7px;
-
-    border-radius: 100px;
-
-    /* No visible rotating border */
-    border: none;
-    background: transparent;
-    box-shadow: none;
-
-    animation: orbit-spin 5s linear infinite;
-
-    pointer-events: none;
-}
-
-
-/* The Moving Glowing Dot */
-
-.orbit-star {
-    position: absolute;
-
-    top: 0;
-    left: 50%;
-
-    width: 9px;
-    height: 9px;
-
-    border-radius: 50%;
-
-    background: #FFFFFF;
-
-    transform: translateX(-50%);
-
-    box-shadow:
-        0 0 5px #FFFFFF,
-        0 0 10px #42D9FF,
-        0 0 20px #42D9FF,
-        0 0 30px #A855F7;
-}
-
-
-/* Move the dot around the oval */
-
-@keyframes orbit-spin {
-
+@keyframes neon-travel {
     from {
         transform: rotate(0deg);
     }
@@ -201,36 +154,8 @@ body {
     to {
         transform: rotate(360deg);
     }
-
 }
 
-
-
-/* =========================================
-   7. MOVING STAR
-========================================= */
-
-.orbit-star {
-    position: absolute;
-
-    top: 0;
-    left: 50%;
-
-    width: 9px;
-    height: 9px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    transform: translate(-50%, -50%);
-
-    box-shadow:
-        0 0 6px white,
-        0 0 12px var(--neon-blue),
-        0 0 22px var(--neon-blue),
-        0 0 35px var(--neon-purple);
-}
 
 
 /* =========================================
@@ -828,4 +753,51 @@ body {
         padding: 0 15px;
     }
 
+}
+/* =================================
+   ANIMATED NEON OVAL SVG
+================================= */
+
+.neon-orbit {
+    position: absolute;
+
+    width: calc(100% + 16px);
+    height: calc(100% + 16px);
+
+    top: -8px;
+    left: -8px;
+
+    overflow: visible;
+
+    pointer-events: none;
+
+    z-index: 4;
+}
+
+.neon-trail {
+    fill: none;
+
+    stroke: url(#neonGradient);
+
+    stroke-width: 4;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 100 900;
+
+    animation: neon-move 3s linear infinite;
+
+    filter:
+        drop-shadow(0 0 4px #00E5FF)
+        drop-shadow(0 0 8px #A855F7);
+}
+
+@keyframes neon-move {
+    from {
+        stroke-dashoffset: 0;
+    }
+
+    to {
+        stroke-dashoffset: -1000;
+    }
 }
